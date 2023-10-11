@@ -31,7 +31,7 @@ public class FakeBarFinder {
 
         List<WebElement> goldBars = driver.findElements(By.xpath("//div[@class='coins']/button"));
 
-        WebElement weighings = driver.findElement(By.xpath("//div[@class='game-info']/ol/li[last()]"));
+
 
 
         for (int i = 1; i < goldBars.size(); i++) {
@@ -46,27 +46,38 @@ public class FakeBarFinder {
             String result = resultButton.getText();
 
 
-                if (result.equals("=")) {
+            if (result.equals("=")) {
 
-                    resetButton.click();
-                    Thread.sleep(2000);
-                    i++;
-                } else if (result.equals(">")) {
-                    fakeBarIndex = rightBowl1.getAttribute("value");
-                    System.out.println(fakeBarIndex);
+                resetButton.click();
+                Thread.sleep(2000);
+                i++;
+            } else if (result.equals(">")) {
+                fakeBarIndex = rightBowl1.getAttribute("value");
+                System.out.println(fakeBarIndex);
 
-                } else if (result.equals("<")) {
-                    fakeBarIndex = leftBowl1.getAttribute("value");
-                }
-
-                WebElement fakeGoldBar = driver.findElement(By.xpath("//button[@id='coin_" + fakeBarIndex + "']"));
-
-                fakeGoldBar.click();
+            } else if (result.equals("<")) {
+                fakeBarIndex = leftBowl1.getAttribute("value");
             }
+
+            WebElement fakeGoldBar = driver.findElement(By.xpath("//button[@id='coin_" + fakeBarIndex + "']"));
+
+
+
+            fakeGoldBar.click();
+        }
+        List<WebElement> weighings = driver.findElements(By.tagName("li"));
+
+        System.out.println("Number of Weighings: " + weighings.size());
+        System.out.println("List of Weighings:");
+
+        for (WebElement weighing : weighings) {
+            System.out.println(weighing.getText());
+        }
+
 
         driver.close();
 
 
-            }
+    }
 }
 
